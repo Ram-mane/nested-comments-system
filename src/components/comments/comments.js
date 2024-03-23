@@ -7,22 +7,20 @@ const Comments = ({ comments, handleAddComments, handleCommentDelete }) => {
   const [commentBody, setCommentBody] = useState("");
 
   const handleAdd = () => {
-    let newComments = {
-      id: Date.now(),
-      text: commentBody,
-      replies: [],
-    };
-    handleAddComments(comments.id, newComments);
+    // let newComments = {
+    //   content: commentBody,
+    // };
+    handleAddComments(comments.id, commentBody);
     setShowInput(false);
   };
 
   return (
     <div>
-      <div className={`${comments.text && "comment-container"}`}>
-        <h3>{comments.text}</h3>
+      <div className={`${comments.content && "comment-container"}`}>
+        <h3>{comments.content}</h3>
         {showInput && (
           <input
-            type="text"
+            type="content"
             onChange={(e) => setCommentBody(e.target.value)}
             autoFocus
           />
@@ -33,7 +31,7 @@ const Comments = ({ comments, handleAddComments, handleCommentDelete }) => {
             <button onClick={() => setShowInput(false)}>Cancle</button>
           </div>
         ) : (
-          comments.text?(
+          comments.content?(
             <div>
             <button onClick={() => setShowInput(true)}>Reply</button>
             <button onClick={()=> handleCommentDelete(comments.id)}>Delete</button>
